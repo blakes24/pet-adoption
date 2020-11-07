@@ -3,13 +3,24 @@
 {% block title %}Adopt a Pet{% endblock %}
 
 {% block content %}
-<h1 class="text-center">Pets</h1>
-{% for pet in pets %}
-<img src="{{pet.image_url}}" alt="{{pet.species}}">
-<p><a href="">{{pet.name}}</a></p>
+<h1 class="text-center p-4">Pets</h1>
+{% for msg in get_flashed_messages() %}
+  <div class="text-info text-center">{{ msg }}</div>
+{% endfor %}
+{% for pet_row in pets | batch(3, '&nbsp;') %}
+<div class="row justify-content-around py-4">
+    {% for pet in pet_row %}
+    <div class=".col">
+        <img src="{{pet.photo_url}}" alt="{{pet.species}}" width="300" class="img-thumbnail img-fluid">
+        <p><a href="/{{pet.id}}">{{pet.name}}</a>
+        {% if pet.available %} <b>Available</b>{% endif %}
+        </p>
+    </div>
+    {% endfor %}
+</div>
 {% endfor %}
 
-<a href="" class="btn btn-info">Add a Pet</a>
+<a href="/add" class="btn btn-info">Add a Pet</a>
 {% endblock %}
 
 
