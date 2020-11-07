@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}Adopt a Pet{% endblock %}
+
+{% block content %}
+<h1 class="text-center">Pets</h1>
+{% for pet in pets %}
+<img src="{{pet.image_url}}" alt="{{pet.species}}">
+<p><a href="">{{pet.name}}</a></p>
+{% endfor %}
+
+<a href="" class="btn btn-info">Add a Pet</a>
+{% endblock %}
+
+
+
